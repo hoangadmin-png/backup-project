@@ -1,18 +1,18 @@
 import { canChiOfDay, canChiOfMonth, canChiOfYear, CHI, chiOfDay, solar2lunar } from './lunar';
 
 const HOANG_DAO_BY_MONTH: Record<number, string[]> = {
-  1: ['Tý', 'Sửu', 'Tỵ', 'Mùi'],
-  2: ['Dần', 'Mão', 'Mùi', 'Dậu'],
-  3: ['Thìn', 'Tỵ', 'Dậu', 'Hợi'],
-  4: ['Ngọ', 'Mùi', 'Sửu', 'Dậu'],
-  5: ['Thân', 'Dậu', 'Sửu', 'Mão'],
-  6: ['Tuất', 'Hợi', 'Mão', 'Tỵ'],
-  7: ['Tý', 'Sửu', 'Tỵ', 'Mùi'],
-  8: ['Dần', 'Mão', 'Mùi', 'Dậu'],
-  9: ['Thìn', 'Tỵ', 'Dậu', 'Hợi'],
-  10: ['Ngọ', 'Mùi', 'Sửu', 'Dậu'],
-  11: ['Thân', 'Dậu', 'Sửu', 'Mão'],
-  12: ['Tuất', 'Hợi', 'Mão', 'Tỵ'],
+  1: ['Tý', 'Sửu', 'Thìn', 'Tỵ', 'Mùi', 'Tuất'],
+  2: ['Dần', 'Mão', 'Ngọ', 'Mùi', 'Dậu', 'Tý'],
+  3: ['Thìn', 'Tỵ', 'Thân', 'Dậu', 'Hợi', 'Dần'],
+  4: ['Ngọ', 'Mùi', 'Tuất', 'Hợi', 'Sửu', 'Thìn'],
+  5: ['Thân', 'Dậu', 'Tý', 'Sửu', 'Mão', 'Ngọ'],
+  6: ['Tuất', 'Hợi', 'Dần', 'Mão', 'Tỵ', 'Thân'],
+  7: ['Tý', 'Sửu', 'Thìn', 'Tỵ', 'Mùi', 'Tuất'],
+  8: ['Dần', 'Mão', 'Ngọ', 'Mùi', 'Dậu', 'Tý'],
+  9: ['Thìn', 'Tỵ', 'Thân', 'Dậu', 'Hợi', 'Dần'],
+  10: ['Ngọ', 'Mùi', 'Tuất', 'Hợi', 'Sửu', 'Thìn'],
+  11: ['Thân', 'Dậu', 'Tý', 'Sửu', 'Mão', 'Ngọ'],
+  12: ['Tuất', 'Hợi', 'Dần', 'Mão', 'Tỵ', 'Thân'],
 };
 
 const HOANG_DAO_HOURS: Record<string, string[]> = {
@@ -73,8 +73,8 @@ export interface DayInfo {
   avoid: string[];
 }
 
-export function isHoangDaoDay(chi: string, lunarMonth: number): boolean {
-  return HOANG_DAO_BY_MONTH[lunarMonth]?.includes(chi) ?? false;
+export function isHoangDao(lunarMonth: number, dayChi: string): boolean {
+  return HOANG_DAO_BY_MONTH[lunarMonth]?.includes(dayChi) ?? false;
 }
 
 export function getDayInfo(date: Date): DayInfo {
@@ -84,12 +84,12 @@ export function getDayInfo(date: Date): DayInfo {
   const lunar = solar2lunar(day, month, year);
   const chiDay = chiOfDay(day, month, year);
   const goodHours = HOANG_DAO_HOURS[chiDay] ?? [];
-  const isHoangDao = isHoangDaoDay(chiDay, lunar.month);
+  const isHoangDaoDay = isHoangDao(lunar.month, chiDay);
   const directionIndex = (day + lunar.month) % DIRECTIONS.length;
   const dayChiIndex = CHI.indexOf(chiDay);
   const clashes = [CHI[(dayChiIndex + 6) % 12], CHI[(dayChiIndex + 6) % 12]];
-  const recommended = isHoangDao ? ['Khai trương', 'Giao dịch', 'Xuất hành', 'Cầu tài'] : ['Làm việc thường nhật', 'Sắp xếp nhà cửa'];
-  const avoid = isHoangDao ? ['Tranh chấp', 'Việc nóng vội'] : ['Động thổ', 'Khai trương', 'Cưới hỏi trọng đại'];
+  const recommended = isHoangDaoDay ? ['Khai trương', 'Giao dịch', 'Xuất hành', 'Cầu tài'] : ['Làm việc thường nhật', 'Sắp xếp nhà cửa'];
+  const avoid = isHoangDaoDay ? ['Tranh chấp', 'Việc nóng vội'] : ['Động thổ', 'Khai trương', 'Cưới hỏi trọng đại'];
   return {
     solar: { day, month, year },
     lunar,
@@ -97,7 +97,7 @@ export function getDayInfo(date: Date): DayInfo {
     canChiMonth: canChiOfMonth(lunar.month, lunar.year),
     canChiYear: canChiOfYear(lunar.year),
     chiDay,
-    isHoangDao,
+    isHoangDao: isHoangDaoDay,
     truc: TRUC[(dayChiIndex + lunar.month - 1 + 12) % 12],
     hoangDaoHours: goodHours.map((chi) => ({ chi, time: CHI_TIME[chi] })),
     hacDaoHours: CHI.filter((chi) => !goodHours.includes(chi)).map((chi) => ({ chi, time: CHI_TIME[chi] })),

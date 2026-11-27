@@ -94,3 +94,84 @@ h1, h2, h3 { font-family: 'Be Vietnam Pro', sans-serif; }
 .bottom-nav button.active svg { color: #f6cc4f; filter: drop-shadow(0 1px 2px rgb(27 10 2 / 45%)); }
 .bottom-nav button:hover { color: #fff9d8; }
 
+/* Giao diện Lịch Ngày 3D */
+.app-header.day-header { position: relative; z-index: 5; display: grid; grid-template-columns: 52px 1fr 96px; align-items: center; gap: 8px; min-height: 76px; padding: 10px 14px; border: 0; background: linear-gradient(135deg, #d39b25 0%, #ffeb9c 42%, #bd7c13 100%); box-shadow: 0 4px 16px rgb(47 34 8 / 30%); }
+.day-header::after { position: absolute; right: 0; bottom: -7px; left: 0; height: 11px; background: linear-gradient(180deg, rgb(255 244 171 / 80%), transparent); content: ''; pointer-events: none; }
+.header-plaque { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 0; padding: 8px 12px; border: 2px solid #f9dc66; border-radius: 16px; color: #ffe99b; background: linear-gradient(180deg, #bd2b20, #79130f); box-shadow: inset 0 0 0 2px #7b190e, 0 3px 0 #8a510d, 0 5px 10px rgb(88 40 5 / 30%); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(13px, 4vw, 19px); font-weight: 800; letter-spacing: .04em; text-shadow: 0 2px #5d100b; white-space: nowrap; }
+.header-circle { position: relative; display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; border: 2px solid #fff0a5; border-radius: 50%; color: #6b2a08; background: linear-gradient(145deg, #fff8c7, #e6ad35); box-shadow: inset 0 0 0 2px rgb(255 255 255 / 60%), 0 3px 6px rgb(88 40 5 / 30%); }
+.header-circle:hover { transform: translateY(-1px); background: #fff3b0; }
+.today-circle { flex-direction: column; gap: 0; }
+.today-circle span { font-size: 19px; font-weight: 800; line-height: 19px; }
+.today-circle small { font-size: 6px; font-weight: 800; letter-spacing: .04em; }
+.header-actions { display: flex; justify-content: flex-end; gap: 7px; }
+.header-actions .header-circle { width: 42px; height: 42px; }
+.header-circle b { position: absolute; top: -3px; right: -2px; display: grid; width: 17px; height: 17px; place-items: center; border: 2px solid #fff0a5; border-radius: 50%; color: #fff; background: #a8271c; font-size: 9px; }
+.day-main { position: relative; padding: 0; background-image: linear-gradient(180deg, rgb(255 250 230 / 62%) 0%, rgb(255 255 255 / 8%) 43%, rgb(13 47 83 / 20%) 100%), url('/anh_nen_phong_canh.png'); background-position: center; background-size: cover; }
+.day-main::before { position: absolute; inset: 0; background: radial-gradient(circle at 50% 20%, rgb(255 255 255 / 32%), transparent 45%); content: ''; pointer-events: none; }
+.day-screen { position: relative; z-index: 1; width: 100%; min-height: 0; padding: 12px 14px 10px; overflow: hidden; }
+.day-stage { width: min(100%, 520px); min-height: 0; margin: 0 auto; padding: 4px 12px 12px; }
+.month-line { display: flex; align-items: center; justify-content: center; gap: 13px; color: #103a69; }
+.month-line strong { padding: 3px 8px; font-size: clamp(20px, 6vw, 31px); font-weight: 800; letter-spacing: -.02em; text-shadow: 0 1px #fff4bd; }
+.month-arrow { display: grid; width: 35px; height: 35px; place-items: center; border: 2px solid #d99a25; border-radius: 50%; color: #9b2c1f; background: #fff6cd; box-shadow: 0 2px 5px rgb(87 50 7 / 25%); }
+.month-arrow:hover { background: #fff1a8; transform: scale(1.04); }
+.solar-hero { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 4vw, 28px); min-height: 132px; }
+.solar-number-hero { color: #0f3460; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(104px, 31vw, 164px); font-weight: 900; letter-spacing: -.08em; line-height: .8; text-shadow: 0 3px 0 #ffe88a, 2px 6px 0 rgb(123 79 14 / 28%), 0 10px 16px rgb(21 54 85 / 24%); -webkit-text-stroke: 2px #d29a26; }
+.day-main .weather-widget { width: 114px; margin: 0; padding: 8px 9px; border: 2px solid #e8c96b; border-radius: 22px; color: #fff8d6; background: linear-gradient(145deg, #23649a, #0d356c); box-shadow: inset 0 0 0 1px rgb(255 255 255 / 42%), 0 5px 12px rgb(10 48 76 / 28%); }
+.day-main .weather-main { color: #fff4b5; }.day-main .weather-main strong { font-size: 24px; }.day-main .weather-location { color: #fff; font-size: 9px; }.day-main .weather-widget select { color: #e9f4ff; font-size: 8px; }.day-main .weather-meta { color: #d5ebff; }.day-main .weather-retry { color: #fff4b5; font-size: 8px; }
+.weekday-ribbon { display: flex; width: fit-content; min-width: 190px; align-items: center; justify-content: center; gap: 9px; margin: -1px auto 9px; padding: 7px 23px; border: 2px solid #d99a25; border-radius: 999px; color: #103a69; background: linear-gradient(180deg, #fff9d7, #f5d98b); box-shadow: inset 0 0 0 2px rgb(255 255 255 / 68%), 0 3px 8px rgb(102 62 10 / 20%); font-size: clamp(18px, 5vw, 25px); font-weight: 800; line-height: 1; }
+.weekday-ribbon small { color: #9c2a20; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.day-main .season-art { height: 86px; margin: 0 8px 7px; border: 2px solid #e0ae38; border-radius: 18px; box-shadow: 0 4px 10px rgb(35 64 75 / 22%); }
+.day-main .calendar-quote { max-width: 390px; margin: 0 auto; color: #153e68; font-size: 14px; font-style: italic; font-weight: 700; line-height: 1.25; text-shadow: 0 1px #fff8db; }
+.day-main .swipe-hint { margin: 5px 0 8px; color: #23496f; font-size: 8px; }
+.lunar-card { position: relative; overflow: visible; padding: 27px 16px 12px; border: 2px solid #d8a62b; border-radius: 25px; outline: 1px solid rgb(255 247 191 / 90%); color: #5c1414; background: linear-gradient(145deg, #fff8e7, #fffdf4 52%, #f7e2aa); box-shadow: inset 0 0 0 3px rgb(255 255 255 / 78%), 0 7px 16px rgb(86 57 10 / 22%); text-align: center; }
+.lunar-badge { position: absolute; top: -17px; left: 50%; padding: 5px 23px; border: 2px solid #f3d264; border-radius: 999px; color: #fff4bf; background: linear-gradient(180deg, #c63224, #8f160f); box-shadow: 0 3px 0 #7c400c, 0 4px 8px rgb(93 35 11 / 28%); font-family: Georgia, 'Times New Roman', serif; font-size: 18px; font-weight: 800; transform: translateX(-50%); }
+.lunar-day-number { position: relative; z-index: 1; color: #b91c1c; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(67px, 18vw, 96px); font-weight: 900; line-height: .8; text-shadow: 1px 2px 0 #f7cc65, 0 4px 7px rgb(107 40 10 / 18%); }
+.cloud-ornament { position: absolute; top: 38px; color: #dfaa2d; font-size: 50px; line-height: 1; opacity: .72; text-shadow: 1px 2px #fff4ba; }.cloud-left { left: 8%; transform: scaleX(-1); }.cloud-right { right: 8%; }
+.lunar-meta { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 9px; color: #103a69; font-size: clamp(14px, 4vw, 19px); font-weight: 800; }.lunar-meta span { color: #5c1414; }.lunar-can-chi { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 5px; color: #73431c; font-size: 11px; font-weight: 700; }.lunar-can-chi i { width: 4px; height: 4px; border-radius: 50%; background: #d99a25; }.lunar-hours { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 6px; margin-top: 8px; padding-top: 7px; border-top: 1px solid #dfbb68; color: #5c1414; font-size: 10px; font-weight: 700; }.lunar-hours svg { color: #c28b12; }.lunar-hours b { color: #103a69; }.lunar-clock { margin-top: 4px; color: #755f43; font-size: 9px; }
+.day-actions { display: flex; align-items: center; justify-content: center; gap: 9px; margin: 11px 0 0; }.day-status, .detail-inline { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 38px; padding: 7px 14px; border: 2px solid #dca62e; border-radius: 999px; background: linear-gradient(180deg, #fff9d7, #f4dc96); box-shadow: 0 3px 7px rgb(103 63 9 / 22%); font-size: 11px; font-weight: 800; }.day-status { color: #ae7410; }.day-status.bad { color: #8f2d20; }.day-status svg { color: #d49b18; }.day-main .detail-inline { margin: 0; color: #8e2419; background: linear-gradient(180deg, #fffce8, #f6df98); font-size: 11px; }.day-main .detail-inline:hover { transform: translateY(-1px); }
+.day-bottom-nav { border-top: 3px solid #d7a631; background: linear-gradient(180deg, #0d4c8e, #082c60); box-shadow: 0 -5px 16px rgb(11 35 67 / 35%); }.day-bottom-nav > div { padding: 0 7px; }.day-bottom-nav button { position: relative; min-height: 72px; color: #e4edfb; font-size: 10px; text-shadow: 0 1px #082c60; }.day-bottom-nav button svg { display: grid; width: 47px; height: 47px; padding: 11px; margin-top: -20px; border: 3px solid #f7da70; border-radius: 50%; color: #9e1f17; background: linear-gradient(145deg, #fff3a4, #d99a20); box-shadow: inset 0 0 0 3px #fff7c5, 0 4px 6px rgb(5 25 52 / 55%); }.day-bottom-nav button.active { color: #fff4b7; }.day-bottom-nav button.active::before { top: 1px; width: 42px; background: #ffe070; }.day-bottom-nav button.active svg { color: #a52418; }.day-bottom-nav button span { margin-top: 2px; }
+@media (max-width: 390px) { .app-header.day-header { grid-template-columns: 46px 1fr 88px; min-height: 68px; padding-inline: 9px; }.header-circle { width: 40px; height: 40px; }.header-actions .header-circle { width: 38px; height: 38px; }.header-plaque { padding: 7px 8px; font-size: 12px; }.day-screen { padding: 9px 9px 7px; }.day-stage { padding-inline: 5px; }.solar-hero { min-height: 113px; }.solar-number-hero { font-size: 100px; }.day-main .weather-widget { width: 101px; padding: 6px; }.weekday-ribbon { min-width: 170px; padding: 6px 17px; font-size: 18px; }.day-main .season-art { height: 67px; }.lunar-card { padding-top: 24px; }.lunar-day-number { font-size: 65px; }.cloud-ornament { top: 35px; font-size: 38px; }.lunar-meta { font-size: 13px; }.lunar-can-chi { font-size: 9px; }.lunar-hours { font-size: 9px; }.day-actions { gap: 5px; }.day-status, .day-main .detail-inline { min-height: 34px; padding-inline: 9px; font-size: 9px; }.day-bottom-nav button { min-height: 67px; }.day-bottom-nav button svg { width: 42px; height: 42px; padding: 9px; } }
+
+.solar-hero { position: relative; display: flex; justify-content: center; min-height: 146px; }
+.solar-number-hero { width: 100%; margin: 0 auto; text-align: center; }
+.day-main .weather-widget { position: absolute; top: 50%; right: 12px; width: 106px; margin: 0; transform: translateY(-50%); }
+.day-main .weather-main { gap: 2px; }
+.day-main .weather-location { white-space: nowrap; }
+.day-main .weather-widget select, .day-main .weather-meta, .day-main .weather-retry { display: none; }
+.day-main .calendar-quote { margin-top: 2px; margin-bottom: 10px; }
+.lunar-card .day-actions { margin-top: 12px; padding-top: 11px; border-top: 1px solid #dfbb68; }
+.day-status, .day-main .detail-inline { flex: 1; white-space: nowrap; }
+
+.app-header:not(.day-header) { color: #fff5c9; background: linear-gradient(135deg, #8f2017, #bd3825 48%, #79150f); border-bottom: 2px solid #e4b53b; box-shadow: 0 3px 12px rgb(74 18 8 / 24%); }
+.app-header:not(.day-header) .brand-mark p { color: #f5d56a; }.app-header:not(.day-header) .brand-mark h1 { color: #fff4c1; }.app-header:not(.day-header) .brand-dot { border-color: #f5d56a; }.app-header:not(.day-header) .header-note { color: #ffe9a2; }
+.app-main:not(.day-main) { background: linear-gradient(145deg, #dcedf1 0%, #eef5eb 42%, #f8ecd1 100%); }
+.app-main:not(.day-main) .section-intro { border: 2px solid #d5a632; border-radius: 20px; background: linear-gradient(145deg, rgb(255 253 242 / 96%), rgb(255 243 200 / 93%)); box-shadow: inset 0 0 0 3px rgb(255 255 255 / 70%), 0 6px 15px rgb(90 66 20 / 16%); }
+.app-main:not(.day-main) .section-intro h1, .app-main:not(.day-main) .month-heading h2, .app-main:not(.day-main) .good-days-heading h2, .app-main:not(.day-main) .category-title h2 { color: #103a69; }
+.app-main:not(.day-main) .section-intro p:last-child { color: #345575; }
+.app-main:not(.day-main) .month-card, .app-main:not(.day-main) .converter-card, .app-main:not(.day-main) .good-days-card, .app-main:not(.day-main) .prayer-category, .app-main:not(.day-main) .prayer-reader { border: 2px solid #d5a632; border-radius: 20px; background: linear-gradient(145deg, #fffdf3, #fff3c9); box-shadow: inset 0 0 0 3px rgb(255 255 255 / 72%), 0 7px 16px rgb(71 76 68 / 16%); }
+.app-main:not(.day-main) .month-filter, .app-main:not(.day-main) .conversion-preview { border: 1px solid #e0bb5d; background: #fff8dd; }.app-main:not(.day-main) .month-cell { border-color: #f0e1b8; background: rgb(255 253 244 / 82%); }.app-main:not(.day-main) .month-cell:hover, .app-main:not(.day-main) .month-cell.selected { border-color: #d39b25; background: #fff0b2; }.app-main:not(.day-main) .month-cell.holiday { border-color: #b91c1c; }.app-main:not(.day-main) .wide-dark-button { border: 2px solid #d8a62b; border-radius: 999px; color: #fff7d1; background: linear-gradient(180deg, #1d5a95, #0d356c); box-shadow: 0 5px 12px rgb(23 61 102 / 20%); }
+.app-main:not(.day-main) .mode-tabs { border: 1px solid #e0bb5d; background: #f7e5ad; }.app-main:not(.day-main) .mode-tabs button.active { color: #8f2017; background: #fffdf4; box-shadow: 0 3px 8px rgb(93 57 11 / 15%); }.app-main:not(.day-main) .field-block input, .app-main:not(.day-main) .lunar-fields input { border-color: #e0bb5d; background: #fffdf4; }.app-main:not(.day-main) .gold-button { border: 2px solid #d6a32b; border-radius: 999px; color: #fff7d1; background: linear-gradient(180deg, #c23726, #8e1e16); box-shadow: 0 4px 10px rgb(100 25 15 / 22%); }
+.app-main:not(.day-main) .category-title { border-bottom: 2px solid #e1b440; border-radius: 18px 18px 0 0; color: #ffe9a2; background: linear-gradient(180deg, #c23826, #8e1c15); }.app-main:not(.day-main) .category-title h2 { color: #fff0b0; }.app-main:not(.day-main) .prayer-row { border-color: #eedcb0; color: #103a69; background: rgb(255 253 244 / 72%); }.app-main:not(.day-main) .prayer-row:hover { background: #fff0b2; }.app-main:not(.day-main) .prayer-row svg, .app-main:not(.day-main) .reader-heading > svg { color: #c18a17; }.app-main:not(.day-main) .prayer-body { border: 1px solid #e0bb5d; border-radius: 14px; color: #173a5e; background: #fffaf0; }.app-main:not(.day-main) .reader-controls { border-color: #d5a632; background: #fff0bb; }
+
+.solar-stack { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.solar-number-hero, .lunar-day-number, .month-screen .solar-number, .month-screen .lunar-number, .month-screen .month-heading h2 { font-family: 'Be Vietnam Pro', sans-serif; font-variant-numeric: tabular-nums; }
+.solar-number-hero { line-height: 1; }
+.lunar-day-number { line-height: 1; }
+.weekday-ribbon { margin: 0 auto; }
+.app-header.header-month { min-height: 50px; padding-block: 7px; }
+.app-header.header-month .brand-mark h1 { font-size: 13px; }
+.tab-month { overflow: hidden; padding: 8px 10px 9px; }
+.tab-month .month-screen { gap: 7px; height: 100%; }
+.tab-month .month-card { min-height: 0; padding: 9px; }
+.tab-month .month-toolbar { min-height: 30px; }
+.tab-month .month-heading h2 { font-size: 18px; line-height: 1.1; }
+.tab-month .month-heading span { margin-top: 2px; font-size: 9px; }
+.tab-month .round-button { width: 29px; height: 29px; }
+.tab-month .month-filter { margin: 7px 0; padding: 6px 8px; }
+.tab-month .filter-switch, .tab-month .star-legend { font-size: 9px; }
+.tab-month .week-row { margin-bottom: 3px; font-size: 9px; }
+.tab-month .month-grid { gap: 2px; }
+.tab-month .month-cell { min-height: clamp(36px, 6.6vh, 46px); border-radius: 5px; }
+.tab-month .solar-number { font-size: 16px; }.tab-month .lunar-number { margin-top: 2px; font-size: 8px; }
+.tab-month .calendar-star { width: 17px; height: 17px; }.tab-month .holiday-label { font-size: 6px; }.tab-month .month-legend { gap: 4px; margin-top: 7px; padding-top: 6px; font-size: 8px; }.tab-month .month-legend svg { width: 14px; height: 14px; }.tab-month .holiday-swatch { width: 9px; height: 9px; }.tab-month .wide-dark-button { padding: 8px 12px; font-size: 11px; }
+

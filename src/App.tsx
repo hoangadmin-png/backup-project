@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { CalendarDays, CalendarRange, BookOpen, CalendarClock, CircleHelp, X } from 'lucide-react';
+import { CalendarDays, CalendarRange, BookOpen, CalendarClock, CircleHelp, FilePenLine, Share2, X } from 'lucide-react';
 import { DayView } from '@/components/DayView';
 import { MonthView, type MonthCell } from '@/components/MonthView';
 import { DateSwitcher } from '@/components/DateSwitcher';
@@ -74,7 +74,7 @@ export default function App() {
   };
 
   const tabs: { id: Tab; label: string; icon: typeof CalendarDays }[] = [
-    { id: 'day', label: 'Lịch Ngày', icon: CalendarDays },
+    { id: 'day', label: 'Chi tiết', icon: CalendarDays },
     { id: 'month', label: 'Lịch Tháng', icon: CalendarRange },
     { id: 'switch', label: 'Đổi Ngày', icon: CalendarClock },
     { id: 'prayer', label: 'Văn Khấn', icon: BookOpen },
@@ -82,14 +82,20 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <header className="app-header"><div className="brand-mark"><span className="brand-dot" /><div><p>NIÊN LỊCH</p><h1>Việt Nam</h1></div></div><div className="header-note"><CircleHelp size={14} /> UTC+7 · Phong tục Việt</div></header>
-      <main className={`app-main ${tab === 'day' ? 'day-main' : ''}`}>
+      <header className={`app-header ${tab === 'day' ? 'day-header' : ''} header-${tab}`}>
+        {tab === 'day' ? <>
+          <button className="header-circle today-circle" onClick={goToday} aria-label="Về hôm nay"><span>{new Date().getDate()}</span><small>HÔM NAY</small></button>
+          <div className="header-plaque"><CalendarDays size={19} /><span>LỊCH VẠN NIÊN</span></div>
+          <div className="header-actions"><button className="header-circle" onClick={() => { void shareDay(); }} aria-label="Chia sẻ"><Share2 size={19} /></button><button className="header-circle" onClick={() => setShowNotes(true)} aria-label="Ghi chú"><FilePenLine size={19} />{selectedNotes.length > 0 && <b>{selectedNotes.length}</b>}</button></div>
+        </> : <><div className="brand-mark"><span className="brand-dot" /><div><p>NIÊN LỊCH</p><h1>Việt Nam</h1></div></div><div className="header-note"><CircleHelp size={14} /> UTC+7 · Phong tục Việt</div></>}
+      </header>
+      <main className={`app-main ${tab === 'day' ? 'day-main' : ''} tab-${tab}`}>
         {tab === 'day' && <DayView info={info} selected={selected} now={now} noteCount={selectedNotes.length} onToday={goToday} onPrevious={() => moveDay(-1)} onNext={() => moveDay(1)} onNotes={() => setShowNotes(true)} onShare={() => { void shareDay(); }} onDetails={() => setShowDetails(true)} />}
         {tab === 'month' && <MonthView year={viewMonth.getFullYear()} month={viewMonth.getMonth() + 1} cells={cells} selected={selected} notes={notes} onSelect={selectDate} onPrev={() => moveMonth(-1)} onNext={() => moveMonth(1)} onBack={goToday} />}
         {tab === 'switch' && <DateSwitcher selected={selected} onSelect={selectDate} />}
         {tab === 'prayer' && <PrayerView selectedPrayerId={prayerId} onSelectPrayer={setPrayerId} />}
       </main>
-      <nav className="bottom-nav" aria-label="Điều hướng chính"><div>{tabs.map(({ id, label, icon: Icon }) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => { setTab(id); if (id !== 'prayer') setPrayerId(null); }}><Icon size={22} strokeWidth={tab === id ? 2.3 : 1.7} /><span>{label}</span></button>)}</div></nav>
+      <nav className={`bottom-nav ${tab === 'day' ? 'day-bottom-nav' : ''}`} aria-label="Điều hướng chính"><div>{tabs.map(({ id, label, icon: Icon }) => <button key={id} className={tab === id ? 'active' : ''} onClick={() => { setTab(id); if (id !== 'prayer') setPrayerId(null); }}><Icon size={22} strokeWidth={tab === id ? 2.3 : 1.7} /><span>{label}</span></button>)}</div></nav>
       {showNotes && <NotesPanel dateLabel={displayDate(selected)} dateKey={dateKey(selected)} notes={selectedNotes} onAdd={addNote} onDelete={deleteNote} onClose={() => setShowNotes(false)} />}
       {showDetails && <><div className="drawer-backdrop" onClick={() => setShowDetails(false)} /><section className="details-drawer" role="dialog" aria-label="Chi tiết ngày"><div className="drawer-handle" /><button className="close-details" onClick={() => setShowDetails(false)} aria-label="Đóng chi tiết"><X size={18} /></button><p className="eyebrow">Tra cứu dân gian</p><h2>Chi tiết ngày {info.canChiDay}</h2><div className="detail-grid"><div><span>Hướng xuất hành (Hỷ Thần)</span><strong>{info.hyThan}</strong></div><div><span>Hướng tài lộc (Tài Thần)</span><strong>{info.taiThan}</strong></div><div><span>Tuổi xung khắc</span><strong>{info.clashes.join(', ')}</strong></div><div><span>Trực</span><strong>{info.truc}</strong></div></div><div className="do-avoid"><div><h3>Nên làm</h3>{info.recommended.map((item) => <span key={item}>+ {item}</span>)}</div><div><h3>Kiêng kỵ</h3>{info.avoid.map((item) => <span key={item}>− {item}</span>)}</div></div></section></>}
     </div>

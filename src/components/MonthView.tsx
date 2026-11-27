@@ -17,7 +17,6 @@ export function MonthView({ year, month, cells, selected, notes, onSelect, onPre
   const noteDates = useMemo(() => new Set(notes.map((note) => note.dateKey)), [notes]);
   return (
     <div className="month-screen">
-      <div className="section-intro"><p className="eyebrow">Tra cứu nhanh</p><h1>Lịch tháng</h1><p>Ngôi sao vàng chỉ xuất hiện khi Địa Chi của ngày thuộc đúng nhóm Hoàng Đạo của tháng Âm lịch.</p></div>
       <section className="month-card">
         <div className="month-toolbar"><button className="round-button" onClick={onPrev} aria-label="Tháng trước"><ChevronLeft size={19} /></button><div className="month-heading"><h2>Tháng {month} · {year}</h2><span>Âm lịch tháng {lunarMonth ?? '--'}</span></div><button className="round-button" onClick={onNext} aria-label="Tháng sau"><ChevronRight size={19} /></button></div>
         <div className="month-filter"><button className={`filter-switch ${goodOnly ? 'active' : ''}`} onClick={() => setGoodOnly((value) => !value)} aria-pressed={goodOnly}><span className="switch-track"><span /></span><Filter size={14} /> Chỉ làm nổi bật ngày Hoàng Đạo</button><span className="star-legend"><Star size={17} fill="currentColor" /> {cells.filter((cell) => cell.isCurrentMonth && cell.info.isHoangDao).length} ngày tốt</span></div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CloudSun, Droplets, MapPin, RefreshCw, Wind } from 'lucide-react';
+import { CloudSun, MapPin, RefreshCw } from 'lucide-react';
 
 interface City { id: string; name: string; latitude: number; longitude: number }
 interface WeatherState { temperature: number; humidity: number; wind: number }
@@ -82,7 +82,6 @@ export function WeatherWidget() {
       <select value={baseCityId} onChange={(event) => setCityId(event.target.value)} aria-label="Đổi thành phố xem thời tiết">
         {CITIES.map((item) => <option key={item.id} value={item.id}>{item.name}</option>)}
       </select>
-      {weather && !offline && <div className="weather-meta"><span><Droplets size={12} /> {Math.round(weather.humidity)}%</span><span><Wind size={12} /> {Math.round(weather.wind)} km/h</span></div>}
       {offline && <button className="weather-retry" onClick={goOnline}><RefreshCw size={12} /> Dữ liệu lưu sẵn · Thử lại</button>}
     </div>
   );
